@@ -1,5 +1,6 @@
 export default {
-  ytStream: {
+  YTStream: {
+  	index: [],
     liveStreamID: '',
     HDID: ''
   }
