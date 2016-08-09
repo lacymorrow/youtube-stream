@@ -1,6 +1,7 @@
 export default {
   YTStream: {
-  	index: [],
+  	channelID: 'UCNSUeRB4hUoCYlnTubLO84A',
+  	playingHD: true,
     liveStreamID: '',
     HDID: ''
   }

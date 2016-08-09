@@ -4,10 +4,17 @@ import {bindActionCreators} from 'redux';
 import YouTube from 'react-youtube';
 import * as actions from '../actions/YTStreamActions';
 
-export const LiveStream = (props) => {
-  // Connects to a given stream (video)
+export const StaticStream = (props) => {
+  // Connects to a given video, plays, connecting to events; destroyed on end
 
-  const {YTStream, actions} = props;
+  const {
+    YTStream, 
+    actions,
+    videoID,
+    _onReady,
+    _onEnd,
+    _onError
+  } = props;
   const opts = {
     height: '720',
     width: '1280',
@@ -18,23 +25,11 @@ export const LiveStream = (props) => {
     }
   };
 
-  const _onReady = (event) => {
-    console.log('YT: video ready', event);
-    //event.target.playVideo();
-  };
-  const _onEnd = (event) => {
-    console.log('YT: video ended', event);
-  };
-  const _onError = (event) => {
-    console.log('YT: video error', event);
-    //event.target.pauseVideo();
-  };
-
   return (
     <div>
-    LIVE
+    STATIC
     <YouTube
-      videoId={"2g811Eo7K8U"}
+      videoId={videoID}
       opts={opts}
       onReady={_onReady}
       onEnd={_onEnd}
@@ -44,9 +39,11 @@ export const LiveStream = (props) => {
   );
 };
 
-LiveStream.propTypes = {
-  YTStream: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+StaticStream.propTypes = {
+  videoID: PropTypes.string.isRequired,
+  _onEnd: PropTypes.func.isRequired,
+  _onError: PropTypes.func.isRequired,
+  _onReady: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -64,4 +61,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LiveStream);
+)(StaticStream);
